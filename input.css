@@ -1,6 +1,0 @@
-@import "tailwindcss";
-
-#projects li {
-    list-style-type: none;
-    flex: 0 0 100%;
-}
