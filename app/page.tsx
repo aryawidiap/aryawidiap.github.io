@@ -1,69 +1,106 @@
+'use client'
 import Image from "next/image";
+import ProjectCard from "./_components/ProjectCard";
+import type Project from "./_models/Project";
+import { HomeIcon } from "lucide-react";
+import { motion, useScroll } from 'motion/react'
+import Link from "next/link";
 
+const projects: Project[] = [
+    {
+        id: 1,
+        title: "Metatah Invitation",
+        description: "A website I made for the invitation to my own Metatah Ceremony (Balinese Traditional Tooth-Filing Ceremony).",
+        thumbnailLink: "/images/sambung-judul.jpeg",
+        repositoryLink: "https://aryawidiap.github.io/metatah-arya-public",
+        videoDemoLink: "https://www.youtube.com/watch?v=yBMCV8MaWGg",
+        liveWebsiteLink: null,
+    },
+    {
+        id: 2,
+        title: "Ghostbumps: Ghost House Management System",
+        description: "Ghostbumps is a web-based booking system, specialized for ghost houses, made for Web Based System Programming class during my time at Asia University.",
+        thumbnailLink: "/images/ghostbumps-frontpage-preview.jpeg",
+        repositoryLink: "https://github.com/aryawidiap/ghostbumps-final",
+        videoDemoLink: null,
+        liveWebsiteLink: null,
+    },
+    {
+        id: 3,
+        title: "Virtual Gendèr",
+        description: "A PC application made with Python TKinter library that simulates the Balinese traditional instrument, Gendèr. This was a team project for a Windows Programming class.",
+        thumbnailLink: "/images/virtual-gender-casual-play-window.png",
+        repositoryLink: "https://github.com/aryawidiap/final_project_windows_programming",
+        videoDemoLink: "https://www.youtube.com/watch?v=7qKxyhkbtnw",
+        liveWebsiteLink: null,
+    },
+    {
+        id: 4,
+        title: "Sambung Judul",
+        description: "A web-based game about connecting one song title to another.",
+        thumbnailLink: "/images/sambung-judul.jpeg",
+        repositoryLink: "https://github.com/aryawidiap/sambung-judul/",
+        videoDemoLink: null,
+        liveWebsiteLink: "https://aryawidiap.github.io/sambung-judul/",
+    },
+]
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    const { scrollYProgress } = useScroll();
+
+    return (
+        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+            <div className="bg-linear-[135deg,#FFFCD1_0%,#FFF75C_2%,#FFBF40_8%,black_50%,#011040_70%,#9696B0_100%] dark:text-white min-h-dvh flex items-stretch flex-col gap-4">
+                <motion.nav className={"w-full fixed py-3 bg-black" + (scrollYProgress.getPrevious()! > 10 ? " bg-black": "")}>
+                    <ul className="flex flex-col gap-1 md:flex-row md:gap-5 items-center justify-center">
+                        <li><Link href="#hero"><HomeIcon /></Link></li>
+                        <li><Link href="#projects">Projects</Link></li>
+                        <li><Link href="#about-me">About</Link></li>
+                        <li><Link href="#contact-me">Contacts</Link></li>
+                    </ul>
+                </motion.nav>
+                <motion.section initial={{opacity: 0}} whileInView={{opacity: 1}} id="hero" className="rounded-xl min-h-[100dvh] flex flex-col justify-center items-center gap-5 md:px-20 md:py-8">
+                    <h1 className="text-6xl yatra-one-regular">Hi! My name is Arya Widia.</h1>
+                    <p>I am a software developer, with focus on web development.</p>
+                </motion.section>
+                <motion.section initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{ ease: "easeOut", duration: 2 }} id="projects" className="rounded-xl p-5 min-h-[50dvh] flex flex-col justify-center items-center gap-5">
+                    <h2 className="text-4xl yatra-one-regular pt-10">Projects</h2>
+                    <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 grid-cols-1">
+                        {projects.map((project) => <ProjectCard key={"" + project.id} project={project} />)}
+                        
+                    </ul>
+                </motion.section>
+                <motion.section initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{ ease: "easeOut", duration: 2 }} id="about-me" className="rounded-xl p-5 min-h-[50dvh] flex flex-col justify-center items-center gap-5">
+                    <h2 className="text-4xl yatra-one-regular">About Me</h2>
+                    <div>Graduated from the Informatics Engineering of ITS Surabaya,
+                        I have acquired knowledge about various software development topics.
+                        Web development, in particular, is where I have the most interest in, since the front-end
+                        development touches on art and graphic design, and the process as a whole
+                        is like pieceing together many problem-solving component to work out the main problem.</div>
+                </motion.section>
+                <motion.section initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{ ease: "easeOut", duration: 2 }} id="contact-me" className="rounded-xl p-5 min-h-[50dvh] flex flex-col justify-center items-center gap-5">
+                    <h2 className="text-4xl yatra-one-regular">My Socials</h2>
+                    <ul className="flex gap-2">
+                        <li>
+                            <a href="https://www.linkedin.com/in/arya-widia-putra/">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="size-[3rem] fill-white">
+                                    {/* <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc. --> */}
+                                    <path
+                                        d="M512 96L127.9 96C110.3 96 96 110.5 96 128.3L96 511.7C96 529.5 110.3 544 127.9 544L512 544C529.6 544 544 529.5 544 511.7L544 128.3C544 110.5 529.6 96 512 96zM231.4 480L165 480L165 266.2L231.5 266.2L231.5 480L231.4 480zM198.2 160C219.5 160 236.7 177.2 236.7 198.5C236.7 219.8 219.5 237 198.2 237C176.9 237 159.7 219.8 159.7 198.5C159.7 177.2 176.9 160 198.2 160zM480.3 480L413.9 480L413.9 376C413.9 351.2 413.4 319.3 379.4 319.3C344.8 319.3 339.5 346.3 339.5 374.2L339.5 480L273.1 480L273.1 266.2L336.8 266.2L336.8 295.4L337.7 295.4C346.6 278.6 368.3 260.9 400.6 260.9C467.8 260.9 480.3 305.2 480.3 362.8L480.3 480z" />
+                                </svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/aryawidiap">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" className="size-[3rem] fill-white">
+                                    {/* <!--!Font Awesome Free v7.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc. --> */}
+                                    <path
+                                        d="M237.9 461.4C237.9 463.4 235.6 465 232.7 465C229.4 465.3 227.1 463.7 227.1 461.4C227.1 459.4 229.4 457.8 232.3 457.8C235.3 457.5 237.9 459.1 237.9 461.4zM206.8 456.9C206.1 458.9 208.1 461.2 211.1 461.8C213.7 462.8 216.7 461.8 217.3 459.8C217.9 457.8 216 455.5 213 454.6C210.4 453.9 207.5 454.9 206.8 456.9zM251 455.2C248.1 455.9 246.1 457.8 246.4 460.1C246.7 462.1 249.3 463.4 252.3 462.7C255.2 462 257.2 460.1 256.9 458.1C256.6 456.2 253.9 454.9 251 455.2zM316.8 72C178.1 72 72 177.3 72 316C72 426.9 141.8 521.8 241.5 555.2C254.3 557.5 258.8 549.6 258.8 543.1C258.8 536.9 258.5 502.7 258.5 481.7C258.5 481.7 188.5 496.7 173.8 451.9C173.8 451.9 162.4 422.8 146 415.3C146 415.3 123.1 399.6 147.6 399.9C147.6 399.9 172.5 401.9 186.2 425.7C208.1 464.3 244.8 453.2 259.1 446.6C261.4 430.6 267.9 419.5 275.1 412.9C219.2 406.7 162.8 398.6 162.8 302.4C162.8 274.9 170.4 261.1 186.4 243.5C183.8 237 175.3 210.2 189 175.6C209.9 169.1 258 202.6 258 202.6C278 197 299.5 194.1 320.8 194.1C342.1 194.1 363.6 197 383.6 202.6C383.6 202.6 431.7 169 452.6 175.6C466.3 210.3 457.8 237 455.2 243.5C471.2 261.2 481 275 481 302.4C481 398.9 422.1 406.6 366.2 412.9C375.4 420.8 383.2 435.8 383.2 459.3C383.2 493 382.9 534.7 382.9 542.9C382.9 549.4 387.5 557.3 400.2 555C500.2 521.8 568 426.9 568 316C568 177.3 455.5 72 316.8 72zM169.2 416.9C167.9 417.9 168.2 420.2 169.9 422.1C171.5 423.7 173.8 424.4 175.1 423.1C176.4 422.1 176.1 419.8 174.4 417.9C172.8 416.3 170.5 415.6 169.2 416.9zM158.4 408.8C157.7 410.1 158.7 411.7 160.7 412.7C162.3 413.7 164.3 413.4 165 412C165.7 410.7 164.7 409.1 162.7 408.1C160.7 407.5 159.1 407.8 158.4 408.8zM190.8 444.4C189.2 445.7 189.8 448.7 192.1 450.6C194.4 452.9 197.3 453.2 198.6 451.6C199.9 450.3 199.3 447.3 197.3 445.4C195.1 443.1 192.1 442.8 190.8 444.4zM179.4 429.7C177.8 430.7 177.8 433.3 179.4 435.6C181 437.9 183.7 438.9 185 437.9C186.6 436.6 186.6 434 185 431.7C183.6 429.4 181 428.4 179.4 429.7z" />
+                                </svg>
+                            </a>
+                        </li>
+                    </ul>
+                </motion.section>
+            </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    );
 }
