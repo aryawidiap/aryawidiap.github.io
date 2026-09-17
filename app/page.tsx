@@ -5,16 +5,18 @@ import type Project from "./_models/Project";
 import { HomeIcon } from "lucide-react";
 import { motion, useScroll } from 'motion/react'
 import Link from "next/link";
+import NavigationBar from "./_components/NavigationBar";
 
 const projects: Project[] = [
     {
         id: 1,
         title: "Metatah Invitation",
         description: "A website I made for the invitation to my own Metatah Ceremony (Balinese Traditional Tooth-Filing Ceremony).",
-        thumbnailLink: "/images/sambung-judul.jpeg",
-        repositoryLink: "https://aryawidiap.github.io/metatah-arya-public",
+        thumbnailLink: "/images/metatah-invitation.jpg",
+        repositoryLink: "https://github.com/aryawidiap/metatah-arya-public",
         videoDemoLink: "https://www.youtube.com/watch?v=yBMCV8MaWGg",
-        liveWebsiteLink: null,
+        liveWebsiteLink: "https://aryawidiap.github.io/metatah-arya-public",
+        techStack: 'HTML, Javascript, CSS',
     },
     {
         id: 2,
@@ -24,6 +26,7 @@ const projects: Project[] = [
         repositoryLink: "https://github.com/aryawidiap/ghostbumps-final",
         videoDemoLink: null,
         liveWebsiteLink: null,
+        techStack: 'Laravel, Vue',
     },
     {
         id: 3,
@@ -33,6 +36,7 @@ const projects: Project[] = [
         repositoryLink: "https://github.com/aryawidiap/final_project_windows_programming",
         videoDemoLink: "https://www.youtube.com/watch?v=7qKxyhkbtnw",
         liveWebsiteLink: null,
+        techStack: 'Python, TKinter',
     },
     {
         id: 4,
@@ -42,25 +46,18 @@ const projects: Project[] = [
         repositoryLink: "https://github.com/aryawidiap/sambung-judul/",
         videoDemoLink: null,
         liveWebsiteLink: "https://aryawidiap.github.io/sambung-judul/",
+        techStack: 'Next.js, MusicBrainz DB',
     },
 ]
 export default function Home() {
     const { scrollYProgress } = useScroll();
 
     return (
-        <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
             <div className="bg-linear-[135deg,#FFFCD1_0%,#FFF75C_2%,#FFBF40_8%,black_50%,#011040_70%,#9696B0_100%] dark:text-white min-h-dvh flex items-stretch flex-col gap-4">
-                <motion.nav className={"w-full fixed py-3 bg-black" + (scrollYProgress.getPrevious()! > 10 ? " bg-black": "")}>
-                    <ul className="flex flex-col gap-1 md:flex-row md:gap-5 items-center justify-center">
-                        <li><Link href="#hero"><HomeIcon /></Link></li>
-                        <li><Link href="#projects">Projects</Link></li>
-                        <li><Link href="#about-me">About</Link></li>
-                        <li><Link href="#contact-me">Contacts</Link></li>
-                    </ul>
-                </motion.nav>
+                <NavigationBar />
                 <motion.section initial={{opacity: 0}} whileInView={{opacity: 1}} id="hero" className="rounded-xl min-h-[100dvh] flex flex-col justify-center items-center gap-5 md:px-20 md:py-8">
-                    <h1 className="text-6xl yatra-one-regular">Hi! My name is Arya Widia.</h1>
-                    <p>I am a software developer, with focus on web development.</p>
+                    <h1 className="text-6xl yatra-one-regular text-center">Hi! My name is Arya Widia.</h1>
+                    <p className="text-center">I am a software developer, with focus on web development.</p>
                 </motion.section>
                 <motion.section initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{ ease: "easeOut", duration: 2 }} id="projects" className="rounded-xl p-5 min-h-[50dvh] flex flex-col justify-center items-center gap-5">
                     <h2 className="text-4xl yatra-one-regular pt-10">Projects</h2>
@@ -71,7 +68,7 @@ export default function Home() {
                 </motion.section>
                 <motion.section initial={{opacity: 0}} whileInView={{opacity: 1}} transition={{ ease: "easeOut", duration: 2 }} id="about-me" className="rounded-xl p-5 min-h-[50dvh] flex flex-col justify-center items-center gap-5">
                     <h2 className="text-4xl yatra-one-regular">About Me</h2>
-                    <div>Graduated from the Informatics Engineering of ITS Surabaya,
+                    <div className="max-w-[50rem]">Graduated from the Informatics Engineering of ITS Surabaya,
                         I have acquired knowledge about various software development topics.
                         Web development, in particular, is where I have the most interest in, since the front-end
                         development touches on art and graphic design, and the process as a whole
@@ -101,6 +98,5 @@ export default function Home() {
                     </ul>
                 </motion.section>
             </div>
-        </div>
     );
 }
