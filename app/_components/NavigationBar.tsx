@@ -11,7 +11,7 @@ export default function NavigationBar() {
     }
 
     return (
-        <motion.nav className={" md:w-fit mt-3 mx-3 md:px-5 fixed md:left-1/2 md:-translate-x-1/2 py-3 bg-stone-800/70 backdrop-blur-sm z-50 rounded-xl"}>
+        <motion.nav className={" md:w-fit mt-3 mx-3 md:px-5 fixed md:left-1/2 md:-translate-x-1/2 py-3 bg-stone-600/70 backdrop-blur-sm z-50 text-shadow-lg text-shadow-white/30 rounded-xl"}>
             <button className="mx-3 p-1 rounded md:hidden hover:cursor-pointer" onClick={() => setOpen(!open)}>
                 {open ? <X /> : <Menu />}
             </button>
