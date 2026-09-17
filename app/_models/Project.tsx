@@ -6,6 +6,7 @@ type Project = {
     repositoryLink: string,
     videoDemoLink: string | null,
     liveWebsiteLink: string | null,
+    techStack: string,
 }
 
 export default Project;
