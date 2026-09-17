@@ -15,7 +15,15 @@ export default function ProjectCard(
                 <h3 className="text-xl font-bold">{project.title}</h3>
                 <p>{project.description}</p>
             </div>
-            <div className="flex gap-4">
+            <div className="mb-4">
+                <div className="font-bold">
+                    Tech stack
+                </div>
+                <div>
+                    {project.techStack}
+                </div>
+            </div>
+            <div className="flex flex-wrap gap-4">
                 <Link href={project.repositoryLink}
                     className="bg-white px-3 py-2 text-black rounded-full">Repository</Link>
                 {project.videoDemoLink
@@ -24,7 +32,7 @@ export default function ProjectCard(
                     : null}
                 {project.liveWebsiteLink
                     ? <Link href={project.liveWebsiteLink}
-                    className="bg-white px-3 py-2 text-black rounded-full">Live Page <ExternalLink /></Link>
+                    className="bg-white px-3 py-2 text-black rounded-full flex gap-1 items-center">Live Page <ExternalLink /></Link>
                     : null}
             </div>
         </li>
