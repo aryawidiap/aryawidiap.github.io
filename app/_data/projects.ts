@@ -1,4 +1,4 @@
-import type Project from "./_models/Project";
+import type Project from "../_models/Project";
 
 const projects: Project[] = [
     {
